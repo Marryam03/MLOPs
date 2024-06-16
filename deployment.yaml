@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlops-deployment
+  namespace: mlops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mlops
+  template:
+    metadata:
+      labels:
+        app: mlops
+    spec:
+      containers:
+      - name: mlops-container
+        image: mlopsfinalproject.azurecr.io/mlopsproject2:latest
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: acr-secret
